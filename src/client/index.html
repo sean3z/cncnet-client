@@ -1,0 +1,22 @@
+<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<link rel="stylesheet" type="text/css" href="style.css" />
+
+<div id="container">
+    <div class="sidebar" id="channels">
+        <select class="list" size="30"></select>
+    </div>
+
+    <div id="lobby">
+        <ul class="messages"></ul>
+        <span id="status">Connecting...</span>
+        <input type="text" id="message" disabled="disabled" />
+    </div>
+
+    <div class="sidebar" id="nicklist">
+        <select class="list" size="30"></select>
+        <div id="controls" style="display: none;"></div>
+    </div>
+</div>
+
+<script type="text/javascript" src="app.js"></script>
