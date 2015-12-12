@@ -1,0 +1,21 @@
+body {
+    font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    /*line-height: 1.5;*/
+}
+
+.panel-body {
+    padding: 0 !important;
+}
+
+.panel-heading {
+    padding-bottom: 0 !important;
+}
+
+.panel {
+    margin-bottom: 0 !important;
+}
+
+.btn {
+    width: 150px;
+}

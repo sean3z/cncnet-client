@@ -1,0 +1,48 @@
+<!doctype html>
+<html ng-strict-di>
+    <head>
+        <title>CnCNet 5 Login</title>
+        <meta charset="utf-8" />
+        <link href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="assets/css/vendor/font-awesome.min.css" />
+        <link rel="stylesheet" type="text/css" href="assets/css/vendor/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="assets/css/login.css" />
+    </head>
+
+    <body ng-app="login">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel panel-login">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    Login
+                                </div>
+                                <div class="col-xs-6 text-right">
+                                    <a href="http://cnc-comm.com/community/index.php?action=register" target="_blank">
+                                        Register
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr />
+
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <login-form />
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="assets/js/vendor/angular.min.js"></script>
+        <script src="assets/js/login/login.js"></script>
+    </body>
+</html>

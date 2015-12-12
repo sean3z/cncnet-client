@@ -3,20 +3,18 @@ var debug = require('debug')('cncnet');
 var EventEmitter = require('events').EventEmitter;
 var util = require('util');
 
-function Relay(options) {
+function Connection(options) {
     if (!options) {
         throw new Error('missing options');
     }
 
     this.options = options;
-    this.channels = {};
-
     this.connect();
 }
 
-util.inherits(Relay, EventEmitter);
+util.inherits(Connection, EventEmitter);
 
-Relay.prototype.connect = function() {
+Connection.prototype.connect = function() {
     var self = this;
     this.socket = net.connect({
         port: this.options.port || 6667,
@@ -44,63 +42,73 @@ Relay.prototype.connect = function() {
     });
 };
 
-Relay.prototype.send = function(message) {
+Connection.prototype.send = function(message) {
     if (this.socket) {
         this.socket.write(message +'\r\n');
         debug('out: %s', message);
     }
 };
 
-Relay.prototype.join = function(channel, password) {
+Connection.prototype.join = function(channel, password) {
     password = password || '';
     this.send(['JOIN', channel, password].join(' '));
 };
 
-Relay.prototype.list = function() {
+Connection.prototype.list = function() {
     this.send('LIST');
 };
 
-Relay.prototype.part = function(channel) {
+Connection.prototype.part = function(channel) {
     this.send(['PART', channel].join(' '));
 };
 
-Relay.prototype.privmsg = function(destination, message) {
+Connection.prototype.privmsg = function(destination, message) {
     this.send(['PRIVMSG', destination, ':'+ message].join(' '));
 };
 
-Relay.prototype.page = function(destination, message) {
-    this.send(['PAGE', destination, ':'+ message].join(' '));
-};
-
-Relay.prototype.action = function(destination, message) {
+Connection.prototype.action = function(destination, message) {
     this.privmsg(destination, String.fromCharCode(1) + 'ACTION' + message + String.fromCharCode(1));
 };
 
-Relay.prototype.delegate = function(buffer) {
+Connection.prototype.delegate = function(buffer) {
     debug('in: %s', buffer.join(' '));
 
     if (buffer[0] == 'PING') {
         this.send('PONG '+ buffer[1]);
     } else if (typeof buffer[1] != undefined) {
+        var data;
         switch(buffer[1]) {
             case '001':
                 this.join(this.options.lobby);
             break;
 
+            case '332':
+                data = {
+                    event: 'title',
+                    destination: buffer[3],
+                    message: buffer.slice(4).join(' ').substring(1)
+                };
+
+                this.emit('*', data);
+            break;
+
             case '353':
-                var names = irc.names(buffer.slice(5).join(' ').substring(1));
-                this.channels[buffer[4]] = (this.channels[buffer[4]] || []).concat(names);
+                data = {
+                    event: 'names',
+                    destination: buffer[4],
+                    message: irc.names(buffer.slice(5).join(' ').substring(1))
+                };
+
+                this.emit('*', data);
             break;
 
             case 'PRIVMSG':
-                var data = {
+                data = {
                     event: 'privmsg',
                     originator: irc.nick(buffer[0]),
                     destination: buffer[2],
                     message: buffer.slice(3).join(' ').substring(1)
                 };
-
-                debug('PRIVMSG data', data);
 
                 if (data.destination.indexOf('#') < 0) {
                     data.destination = irc.nick(data.destination);
@@ -109,41 +117,23 @@ Relay.prototype.delegate = function(buffer) {
                 this.emit('*', data);
             break;
 
-            case 'JOIN':
-                var data = {
-                    event: 'join',
+            case 'QUIT':
+                data = {
+                    event: 'quit',
                     originator: irc.nick(buffer[0]),
-                    destination: buffer[2]
+                    message: buffer.slice(2).join(' ').substring(1)
                 };
-
-                debug('JOIN data', data);
-
-                if (data.originator != this.options.nick.toLowerCase()) {
-                    if (this.channels[data.destination] && this.channels[data.destination].indexOf(data.originator) < 0) {
-                        this.channels[data.destination].push(data.originator);
-                    }
-                } else {
-                    this.channels[data.destination] = [];
-                }
 
                 this.emit('*', data);
             break;
 
+            case 'JOIN':
             case 'PART':
-                var data = {
-                    event: 'part',
+                data = {
+                    event: buffer[1].toLowerCase(),
                     originator: irc.nick(buffer[0]),
                     destination: buffer[2]
                 };
-
-                debug('PART data', data);
-
-                if (data.originator != this.options.nick.toLowerCase()) {
-                    var i = this.channels[data.destination].indexOf(data.originator);
-                    if (i >= 0) this.channels[data.destination].splice(i, 1);
-                } else {
-                    delete this.channels[data.destination];
-                }
 
                 this.emit('*', data);
             break;
@@ -153,7 +143,7 @@ Relay.prototype.delegate = function(buffer) {
 
 var irc = {
     nick: function(string) {
-        return string.replace(/:|!.*/g, '').toLowerCase();
+        return string.replace(/:|!.*/g, '');
     },
     names: function(string) {
         string = string.replace(/,\d+,\d+/g, '').split(' ');
@@ -164,4 +154,4 @@ var irc = {
     }
 };
 
-module.exports = Relay;
+module.exports = Connection;

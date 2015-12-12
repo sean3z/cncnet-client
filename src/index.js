@@ -1,5 +1,6 @@
-var app = require('app');  // Module to control application life.
-var BrowserWindow = require('browser-window');  // Module to create native browser window.
+const app = require('app');  // Module to control application life.
+const BrowserWindow = require('browser-window');  // Module to create native browser window.
+const ipc = require('electron').ipcMain;
 
 // Report crashes to our server.
 require('crash-reporter').start();
@@ -21,15 +22,41 @@ app.on('window-all-closed', function() {
 // initialization and is ready to create browser windows.
 app.on('ready', function() {
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 800, height: 600});
+  mainWindow = new BrowserWindow({width: 400, height: 360, center: true});
 
   // and load the index.html of the app.
-  mainWindow.loadUrl('file://' + __dirname + '/client/index.html');
-
-  require(__dirname +'/server/websocket.js');
-
-  // Open the DevTools.
+  mainWindow.loadURL('file://' + __dirname + '/client/login.html');
+  //mainWindow.setResizable(false);
   mainWindow.openDevTools();
+  mainWindow.setMenu(null);
+
+  ipc.on('asynchronous-message', function(event, arg) {
+      switch (arg.event) {
+          case 'authenticated':
+            mainWindow.hide();
+
+            // require(__dirname +'/server/websocket')(arg);
+            mainWindow.loadURL('file://' + __dirname + '/client/app.html');
+            mainWindow.show();
+            mainWindow.setSize(800, 600);
+            mainWindow.setResizable(true);
+            mainWindow.setMinimumSize(800, 600);
+
+            // Open the DevTools.
+            mainWindow.openDevTools();
+          break;
+
+          case 'privmsg':
+              mainWindow.flashFrame(true);
+          break;
+      }
+  });
+
+  // Open external links in default Browser when clicked
+  mainWindow.webContents.on('new-window', function(e, url) {
+    e.preventDefault();
+    require('shell').openExternal(url);
+  });
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {

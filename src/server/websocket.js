@@ -1,5 +1,5 @@
-var Relay = require('./Relay');
-var debug = require('debug')('xwisadmin');
+var Connection = require('./Connection');
+var debug = require('debug')('cncnet');
 var http = require('http');
 
 module.exports = websocket;
@@ -9,9 +9,9 @@ function websocket(options) {
     var io = require('socket.io')(server);
     server.listen(4008);
 
-    var bot = new Relay({
-       nick: 'tahj_',
-       host: 'irc.freenode.net',
+    var bot = new Connection({
+       nick: options.nick,
+       host: 'irc.gamesurge.net',
        lobby: '#cncnet'
     });
 
