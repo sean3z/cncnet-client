@@ -28,7 +28,7 @@ function LobbyCtrl($scope, $filter) {
         });
 
         var elem = angular.element('<div></div>');
-        vm.chat.append(elem.html(timestamp() + '<'+ user.nick +'>: ' + message));
+        vm.chat.append(elem.html(timestamp() + '&lt;'+ user.nick +'&gt;: ' + message));
     };
 
     socket.on('connect', function () {
