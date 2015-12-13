@@ -19,3 +19,47 @@ body {
 .btn {
     width: 150px;
 }
+
+.login {
+    background-color: #1e2127;
+    text-transform: uppercase;
+}
+
+.login .panel {
+    background-color: #1e2127;
+    color: #B5BBC7;
+}
+
+.login hr {
+    border-top: 1px solid #2B2D31;
+}
+
+.login .register {
+    color: #21D631;
+}
+
+.login .forgot-password {
+    color: #3D414E;
+    font-size: 12px;
+}
+
+.login input, .login .input-group-addon {
+    background: #14161B;
+    border-color: #22252D;
+}
+
+.login .panel-heading {
+    padding-top: 20px;
+}
+
+.login .logo {
+    width: 250px;
+}
+
+.login .btn-success {
+    background: #1CAB29;
+    border-color: green;
+    color: white;
+    margin-top: 20px;
+    text-transform: uppercase;
+}
