@@ -22,7 +22,7 @@ app.on('window-all-closed', function() {
 // initialization and is ready to create browser windows.
 app.on('ready', function() {
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 400, height: 360, center: true});
+  mainWindow = new BrowserWindow({width: 400, height: 490, center: true});
 
   // and load the index.html of the app.
   mainWindow.loadURL('file://' + __dirname + '/client/login.html');
