@@ -20,6 +20,18 @@ body {
     width: 150px;
 }
 
+.btn-success {
+    background: #1CAB29;
+    border-color: green;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.btn-success:hover {
+    background: #1c8a25 !important;
+    border-color: green !important;
+}
+
 .login {
     background-color: #1e2127;
     text-transform: uppercase;
@@ -57,9 +69,5 @@ body {
 }
 
 .login .btn-success {
-    background: #1CAB29;
-    border-color: green;
-    color: white;
     margin-top: 20px;
-    text-transform: uppercase;
 }

@@ -11,6 +11,7 @@ body {
 
 .btn {
     border-radius: 2px !important;
+    text-transform: uppercase;
 }
 
 .btn-default {
@@ -25,10 +26,22 @@ body {
     border-color: #30343E;
 }
 
-.btn-default:hover {
+.btn-default:hover, .btn-default:focus {
     color: #fff;
-    background-color: #222631!important;
-    border-color: #222631!important;
+    background-color: #222631 !important;
+    border-color: #222631 !important;
+}
+
+.btn-success {
+    background: #1CAB29;
+    border-color: green;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.btn-success:hover, .btn-success:focus {
+    background: #1c8a25 !important;
+    border-color: green !important;
 }
 
 nav {
@@ -56,7 +69,7 @@ nav li a {
 }
 
 nav li.active a {
-    color: #6f7890;
+    color: #4D5361;
     background-color: #252830;
 }
 
