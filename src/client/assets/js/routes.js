@@ -1,10 +1,7 @@
 (function() {
-    angular.module('app', [
-        'ui.router'
-    ]);
-
     angular.module('app').config(configuration);
 
+    configuration.$inject = ['$stateProvider', '$urlRouterProvider'];
     function configuration($stateProvider, $urlRouterProvider) {
         $stateProvider
             .state('lobby', {

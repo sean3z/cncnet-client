@@ -1,0 +1,125 @@
+.lobby .list {
+    height: 450px;
+    background-color: #1e2127;
+    margin-bottom: 15px;
+    padding: 10px;
+}
+
+.lobby .chat {
+    height: 450px;
+    background-color: #1e2127;
+    margin-bottom: 15px;
+    padding: 10px;
+    overflow-x: hidden;
+}
+
+.lobby .channel-topic {
+    background-color: #1e2127;
+    padding: 5px;
+    margin: 5px 0;
+    overflow-x: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.lobby .channel-list {
+    height: 250px;
+}
+
+.lobby .nicklist {
+    overflow-x: hidden;
+}
+
+.lobby .game-information {
+    height: 162px;
+}
+
+.lobby input {
+    border: 1px solid #434857;
+    background-color: #1e2127;
+    color: #cfd2da;
+}
+
+.lobby .input-group-addon {
+    background: transparent;
+    border: 1px solid #434857;
+    border-right: none;
+}
+
+.lobby .user-action {
+    font-style: italic;
+}
+
+.lobby .user-action.user-part,
+.lobby .user-action.user-quit {
+    color: #858F98;
+}
+
+.lobby .user-action.user-join {
+    color: #33802f;
+}
+
+.lobby .user-action.action {
+    color: #731f05;
+    font-weight: bold;
+}
+
+.lobby .timestamp {
+    font-style: normal;
+}
+
+.lobby .user-color-0 {
+    color: white;
+}
+
+.lobby .user-color-1 {
+    color: black;
+}
+
+.lobby .user-color-2 {
+    color: blue;
+}
+
+.lobby .user-color-3 {
+    color: green;
+}
+
+.lobby .user-color-4 {
+    color: red;
+}
+
+.lobby .user-color-5 {
+    color: brown;
+}
+
+.lobby .user-color-6 {
+    color: purple;
+}
+
+.lobby .user-color-7 {
+    color: orange;
+}
+
+.lobby .user-color-8 {
+    color: yellow;
+}
+
+.lobby .user-color-9 {
+    color: lightgreen;
+}
+
+.lobby .user-color-10 {
+    color: cyan;
+}
+
+.lobby .user-color-11 {
+    color: lightcyan;
+}
+
+.lobby .user-color-12 {
+    color: lightblue;
+}
+
+.lobby .user-color-13 {
+    color: pink;
+}

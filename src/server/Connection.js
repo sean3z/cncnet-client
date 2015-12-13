@@ -84,7 +84,7 @@ Connection.prototype.delegate = function(buffer) {
 
             case '332':
                 data = {
-                    event: 'title',
+                    event: 'topic',
                     destination: buffer[3],
                     message: buffer.slice(4).join(' ').substring(1)
                 };

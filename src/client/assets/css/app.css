@@ -1,9 +1,16 @@
-body {
+body, .btn {
     font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 14px;
+    font-size: 12px;
     line-height: 1.5;
+}
+
+body {
     color: #cfd2da;
     background-color: #252830;
+}
+
+.btn {
+    border-radius: 2px !important;
 }
 
 nav {
@@ -28,6 +35,11 @@ nav li a {
     font-size: 25px;
     text-align: center;
     border-top: 1px solid #252830;
+}
+
+nav li.active a {
+    color: #6f7890;
+    background-color: #252830;
 }
 
 nav li a:focus,

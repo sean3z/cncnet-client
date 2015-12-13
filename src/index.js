@@ -35,12 +35,12 @@ app.on('ready', function() {
           case 'authenticated':
             mainWindow.hide();
 
-            // require(__dirname +'/server/websocket')(arg);
+            require(__dirname +'/server/websocket')(arg);
             mainWindow.loadURL('file://' + __dirname + '/client/app.html');
             mainWindow.show();
-            mainWindow.setSize(800, 600);
+            mainWindow.setSize(1024, 600);
             mainWindow.setResizable(true);
-            mainWindow.setMinimumSize(800, 600);
+            mainWindow.setMinimumSize(1024, 600);
 
             // Open the DevTools.
             mainWindow.openDevTools();

@@ -1,1 +1,53 @@
-lobby
+<div class="lobby">
+    <div class="row">
+        <div class="col-sm-offset-3 col-sm-7">
+            <div class="channel-topic">
+                {{lobbyCtrlVM.topic}}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-3 text-center">
+            <div class="list channel-list">
+
+            </div>
+
+            <h6 class="text-left">Game Information</h6>
+            <div class="list game-information">
+
+            </div>
+
+            <a href="" class="btn btn-success pull-left">
+                Create Game <i class="fa fa-plus-circle"></i>
+            </a>
+
+            <a href="" class="btn btn-default pull-right">
+                Join Game <i class="fa fa-arrow-circle-right"></i>
+            </a>
+        </div>
+
+        <div class="col-sm-7">
+            <div class="chat"></div>
+
+            <div class="input-group">
+                <div class="input-group-addon">
+                    <i class="fa fa-wechat"></i>
+                </div>
+                <form ng-submit="lobbyCtrlVM.submit()">
+                    <input type="text" ng-model="lobbyCtrlVM.message" class="form-control" placeholder="Type here to chat...">
+                </form>
+            </div>
+        </div>
+
+        <div class="col-sm-2">
+            <div class="list nicklist">
+                <ul class="users list-group">
+                    <li ng-repeat="nick in lobbyCtrlVM.nicklist | orderBy:'toString()'">
+                        {{nick}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

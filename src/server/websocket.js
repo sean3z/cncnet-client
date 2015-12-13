@@ -18,4 +18,21 @@ function websocket(options) {
     bot.on('*', function(data) {
         io.emit(data.event, data)
     });
+
+    io.on('connect', function(socket) {
+        socket.on('*', function(data) {
+            switch (data.event) {
+                case 'privmsg':
+                    bot.privmsg(data.destination, data.message);
+                    break;
+
+                case 'whoami':
+                    io.emit(data.event, {
+                        nick: options.nick,
+                        channel: '#cncnet'
+                    });
+                    break;
+            }
+        });
+    });
 }

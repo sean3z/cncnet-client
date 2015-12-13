@@ -7,33 +7,34 @@
         <link rel="stylesheet" type="text/css" href="assets/css/vendor/font-awesome.min.css" />
         <link rel="stylesheet" type="text/css" href="assets/css/vendor/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="assets/css/app.css" />
+        <link rel="stylesheet" type="text/css" href="assets/css/lobby.css" />
     </head>
 
     <body ng-app="app">
         <nav>
             <ul class="nav nav-stacked">
-                <li>
-                    <a href="../index.html">
-                        <i class="fa fa-user"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="../order-history/index.html">
+                <li class="active">
+                    <a href="#">
                         <i class="fa fa-wechat"></i>
                     </a>
                 </li>
                 <li>
-                    <a href="../fluid/index.html">
+                    <a href="#">
+                        <i class="fa fa-user"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
                         <i class="fa fa-trophy"></i>
                     </a>
                 </li>
-                <li class="active">
-                    <a href="../icon-nav/index.html">
+                <li>
+                    <a href="#">
                         <i class="fa fa-cog"></i>
                     </a>
                 </li>
                 <li>
-                    <a href="../docs/index.html">
+                    <a href="#">
                         <i class="fa fa-life-saver"></i>
                     </a>
                 </li>
@@ -50,7 +51,9 @@
         <script src="assets/js/vendor/angular-ui-router.min.js"></script>
         <script src="assets/js/vendor/socket.io-1.2.0.js"></script>
 
+        <script src="assets/js/app.js"></script>
         <script src="assets/js/routes.js"></script>
+        <script src="assets/js/lobby/lobby.js"></script>
     </body>
 </html>
 
