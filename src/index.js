@@ -38,9 +38,9 @@ app.on('ready', function() {
             require(__dirname +'/server/websocket')(arg);
             mainWindow.loadURL('file://' + __dirname + '/client/app.html');
             mainWindow.show();
-            mainWindow.setSize(1024, 600);
+            mainWindow.setSize(1100, 600);
             mainWindow.setResizable(true);
-            mainWindow.setMinimumSize(1024, 600);
+            mainWindow.setMinimumSize(1100, 600);
 
             // Open the DevTools.
             mainWindow.openDevTools();
