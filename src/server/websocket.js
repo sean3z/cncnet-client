@@ -9,29 +9,28 @@ function websocket(options) {
     var io = require('socket.io')(server);
     server.listen(4008);
 
-    var bot = new Connection({
+    var relay = new Connection({
        nick: options.nick,
        host: 'irc.gamesurge.net',
        lobby: '#cncnet'
     });
 
-    bot.on('*', function(data) {
+    relay.on('*', function(data) {
         io.emit(data.event, data)
     });
 
     io.on('connect', function(socket) {
         socket.on('*', function(data) {
             switch (data.event) {
-                case 'privmsg':
-                    bot.privmsg(data.destination, data.message);
-                    break;
-
                 case 'whoami':
                     io.emit(data.event, {
                         nick: options.nick,
                         channel: '#cncnet'
                     });
-                    break;
+                break;
+
+                default:
+                    relay[data.event] && relay[data.event](data);
             }
         });
     });

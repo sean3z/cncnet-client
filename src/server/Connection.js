@@ -49,25 +49,33 @@ Connection.prototype.send = function(message) {
     }
 };
 
-Connection.prototype.join = function(channel, password) {
-    password = password || '';
-    this.send(['JOIN', channel, password].join(' '));
+Connection.prototype.join = function(opts) {
+    if (!opts.destination) return;
+    opts.password = opts.password || '';
+    this.send(['JOIN', opts.destination, opts.password].join(' '));
 };
 
 Connection.prototype.list = function() {
     this.send('LIST');
 };
 
-Connection.prototype.part = function(channel) {
-    this.send(['PART', channel].join(' '));
+Connection.prototype.part = function(opts) {
+    if (!opts.destination) return;
+    this.send(['PART', opts.destination].join(' '));
 };
 
-Connection.prototype.privmsg = function(destination, message) {
-    this.send(['PRIVMSG', destination, ':'+ message].join(' '));
+Connection.prototype.privmsg = function(opts) {
+    if (!opts.destination || !opts.message) return;
+    this.send(['PRIVMSG', opts.destination, ':'+ opts.message].join(' '));
 };
 
-Connection.prototype.action = function(destination, message) {
-    this.privmsg(destination, String.fromCharCode(1) + 'ACTION' + message + String.fromCharCode(1));
+Connection.prototype.action = function(opts) {
+    if (!opts.destination || !opts.message) return;
+
+    this.privmsg({
+        destination: opts.destination,
+        message: String.fromCharCode(1) + 'ACTION' + opts.message + String.fromCharCode(1)
+    });
 };
 
 Connection.prototype.delegate = function(buffer) {
@@ -79,7 +87,9 @@ Connection.prototype.delegate = function(buffer) {
         var data;
         switch(buffer[1]) {
             case '001':
-                this.join(this.options.lobby);
+                this.join({
+                    destination: this.options.lobby
+                });
             break;
 
             case '332':
