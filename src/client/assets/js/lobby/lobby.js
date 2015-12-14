@@ -14,8 +14,6 @@ function LobbyCtrl($scope, $filter) {
     vm.nicklist = [];
 
     vm.submit = function() {
-        console.log('vm.message', vm.message);
-
         var message = vm.message;
         vm.message = '';
 
