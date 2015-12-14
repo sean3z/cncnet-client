@@ -1,15 +1,14 @@
 var ipc = require('electron').ipcRenderer;
-var socket = io.connect('http://localhost:4008');
-var user = {};
 
 angular.module('app').controller('LobbyCtrl', LobbyCtrl);
 
-LobbyCtrl.$inject = ['$scope', '$filter']
-function LobbyCtrl($scope, $filter) {
+LobbyCtrl.$inject = ['$scope', '$filter', 'UserSvc', 'SocketSvc']
+function LobbyCtrl($scope, $filter, UserSvc, SocketSvc) {
     var vm = this;
+    var socket = SocketSvc.connection;
 
-    vm.chat = angular.element(document.getElementsByClassName('chat'));
-    vm.users = angular.element(document.getElementsByClassName('users'));
+    vm.chat = angular.element(document.getElementById('chat'));
+    vm.users = angular.element(document.getElementById('nicklist'));
     vm.topic = 'Play classic Command & Conquer games online ...';
     vm.nicklist = [];
 
@@ -17,32 +16,17 @@ function LobbyCtrl($scope, $filter) {
         var message = vm.message;
         vm.message = '';
 
-        if (!user.nick || !user.channel) return;
+        if (!UserSvc.nick || !UserSvc.channel) return;
 
         socket.emit('*', {
             event: 'privmsg',
-            destination: user.channel,
+            destination: UserSvc.channel,
             message: message
         });
 
         var elem = angular.element('<div></div>');
-        vm.chat.append(elem.html(timestamp() + '&lt;'+ user.nick +'&gt;: ' + message));
+        vm.chat.append(elem.html(timestamp() + '&lt;'+ UserSvc.nick +'&gt;: ' + message));
     };
-
-    socket.on('connect', function () {
-        socket.emit('*', {
-            event: 'whoami'
-        });
-    });
-
-    socket.on('disconnect', function () {
-
-    });
-
-    socket.on('whoami', function(data) {
-        console.log(data);
-        user = data;
-    });
 
     socket.on('topic', function(data) {
         console.log(data);
@@ -56,10 +40,9 @@ function LobbyCtrl($scope, $filter) {
         for (var i = 0, x = data.message.length; i < x; i++) {
             if (vm.nicklist.indexOf(data.message[i]) < 0) {
                 vm.nicklist.push(data.message[i]);
+                $scope.$apply();
             }
         }
-
-        $scope.$apply();
     });
 
     socket.on('quit', function(data) {

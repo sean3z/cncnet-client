@@ -13,28 +13,28 @@
     <body ng-app="app">
         <nav>
             <ul class="nav nav-stacked">
-                <li class="active">
-                    <a href="#" ui-sref="lobby">
+                <li ui-sref-active="active">
+                    <a href ui-sref="app.lobby">
                         <i class="fa fa-wechat"></i>
                     </a>
                 </li>
-                <li>
-                    <a href="#">
+                <li ui-sref-active="active">
+                    <a href ui-sref="app.user">
                         <i class="fa fa-user"></i>
                     </a>
                 </li>
-                <li>
-                    <a href="#">
+                <li ui-sref-active="active">
+                    <a href ui-sref="app.ladder">
                         <i class="fa fa-trophy"></i>
                     </a>
                 </li>
-                <li>
-                    <a href="#" ui-sref="settings">
+                <li ui-sref-active="active">
+                    <a href ui-sref="app.settings">
                         <i class="fa fa-cog"></i>
                     </a>
                 </li>
-                <li>
-                    <a href="#">
+                <li ui-sref-active="active">
+                    <a href ui-sref="help">
                         <i class="fa fa-life-saver"></i>
                     </a>
                 </li>
@@ -43,16 +43,22 @@
 
         <div class="container-fluid">
             <div class="row">
-                <div class="col-sm-12" ui-view></div>
+                <ui-view/>
             </div>
         </div>
 
         <script src="assets/js/vendor/angular.min.js"></script>
         <script src="assets/js/vendor/angular-ui-router.min.js"></script>
+        <script src="assets/js/vendor/ct-ui-router-extras.core.min.js"></script>
+        <script src="assets/js/vendor/ct-ui-router-extras.sticky.min.js"></script>
         <script src="assets/js/vendor/socket.io-1.2.0.js"></script>
 
+        <script src="assets/js/socket.js"></script>
         <script src="assets/js/app.js"></script>
         <script src="assets/js/routes.js"></script>
+
+        <script src="assets/js/user/user.service.js"></script>
+
         <script src="assets/js/lobby/lobby.js"></script>
         <script src="assets/js/settings/settings.js"></script>
     </body>
