@@ -16,22 +16,25 @@ function LobbyCtrl($scope, $filter, UserSvc, SocketSvc) {
         var message = vm.message;
         vm.message = '';
 
-        if (!UserSvc.nick || !UserSvc.channel) return;
+        UserSvc.whoami().then(function(user) {
+            socket.emit('*', {
+                event: 'privmsg',
+                destination: user.channel,
+                message: message
+            });
 
-        socket.emit('*', {
-            event: 'privmsg',
-            destination: UserSvc.channel,
-            message: message
+            var elem = angular.element('<div></div>');
+            vm.chat.append(elem.html(timestamp() + '&lt;'+ user.nick +'&gt;: ' + message));
         });
-
-        var elem = angular.element('<div></div>');
-        vm.chat.append(elem.html(timestamp() + '&lt;'+ UserSvc.nick +'&gt;: ' + message));
     };
 
     socket.on('topic', function(data) {
         console.log(data);
         vm.topic = data.message;
         $scope.$apply();
+
+        // app is ready
+        document.getElementById('loading').style.display = 'none';
     });
 
     socket.on('names', function(data) {
@@ -57,6 +60,7 @@ function LobbyCtrl($scope, $filter, UserSvc, SocketSvc) {
         var elem = angular.element('<div></div>');
         elem.addClass('user-action user-quit');
         vm.chat.append(elem.html(timestamp() + data.originator +' quit (' + data.message +')'));
+        scrollToBottom();
     });
 
     socket.on('part', function(data) {
@@ -71,6 +75,7 @@ function LobbyCtrl($scope, $filter, UserSvc, SocketSvc) {
         var elem = angular.element('<div></div>');
         elem.addClass('user-action user-part');
         vm.chat.append(elem.html(timestamp() + data.originator +' left ' + data.destination));
+        scrollToBottom();
     });
 
     socket.on('join', function(data) {
@@ -84,6 +89,7 @@ function LobbyCtrl($scope, $filter, UserSvc, SocketSvc) {
         var elem = angular.element('<div></div>');
         elem.addClass('user-action user-join');
         vm.chat.append(elem.html(timestamp() + data.originator +' joined ' + data.destination));
+        scrollToBottom();
     });
 
     socket.on('privmsg', function(data) {
@@ -103,9 +109,15 @@ function LobbyCtrl($scope, $filter, UserSvc, SocketSvc) {
             }
             vm.chat.append(elem.html(timestamp() + '&lt;'+ data.originator +'&gt;: ' + data.message));
         }
+
+        scrollToBottom();
     });
 
     function timestamp() {
         return '<span class="timestamp">['+ $filter('date')(Date.now(), 'HH:mm:ss') +']</span> ';
+    }
+
+    function scrollToBottom() {
+        vm.chat[0].scrollTop = vm.chat[0].scrollHeight + 10;
     }
 }

@@ -2,6 +2,7 @@
     angular.module('app', [
         'ui.router',
         'ct.ui.router.extras.sticky',
+        'ui.bootstrap',
         'Socket'
     ]);
 

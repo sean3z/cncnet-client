@@ -28,6 +28,7 @@
 
 .lobby .nicklist {
     overflow-x: hidden;
+    white-space: nowrap;
 }
 
 .lobby .game-information {

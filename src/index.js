@@ -26,8 +26,8 @@ app.on('ready', function() {
 
   // and load the index.html of the app.
   mainWindow.loadURL('file://' + __dirname + '/client/login.html');
-  //mainWindow.setResizable(false);
-  mainWindow.openDevTools();
+  mainWindow.setResizable(false);
+  // mainWindow.openDevTools();
   mainWindow.setMenu(null);
 
   ipc.on('asynchronous-message', function(event, arg) {
@@ -38,9 +38,9 @@ app.on('ready', function() {
             require(__dirname +'/server/websocket')(arg);
             mainWindow.loadURL('file://' + __dirname + '/client/app.html');
             mainWindow.show();
-            mainWindow.setSize(1100, 600);
+            mainWindow.setSize(1180, 560);
             mainWindow.setResizable(true);
-            mainWindow.setMinimumSize(1100, 600);
+            mainWindow.setMinimumSize(1180, 560);
 
             // Open the DevTools.
             mainWindow.openDevTools();
