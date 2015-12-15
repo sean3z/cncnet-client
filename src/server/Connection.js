@@ -87,9 +87,8 @@ Connection.prototype.delegate = function(buffer) {
         var data;
         switch(buffer[1]) {
             case '001':
-                this.join({
-                    destination: this.options.lobby
-                });
+                this.join({destination: this.options.lobby});
+                this.join({destination: this.options.games});
             break;
 
             case '332':
@@ -147,6 +146,14 @@ Connection.prototype.delegate = function(buffer) {
 
                 this.emit('*', data);
             break;
+
+            default:
+                if (buffer.length) {
+                    this.emit('*', {
+                        event: 'server',
+                        data: buffer
+                    });
+                }
         }
     }
 };

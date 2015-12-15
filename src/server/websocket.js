@@ -12,7 +12,8 @@ function websocket(options) {
     var relay = new Connection({
        nick: options.nick,
        host: 'irc.gamesurge.net',
-       lobby: '#cncnet'
+       lobby: '#cncnet',
+       games: '#cncnet-games'
     });
 
     relay.on('*', function(data) {
@@ -25,7 +26,7 @@ function websocket(options) {
                 case 'whoami':
                     io.emit(data.event, {
                         nick: options.nick,
-                        channel: '#cncnet'
+                        lobby: '#cncnet'
                     });
                 break;
 

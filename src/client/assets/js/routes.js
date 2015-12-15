@@ -43,7 +43,7 @@
             url: '/game',
             sticky: true,
             params: {
-              method: null
+              create: null
             },
             views: {
                 game: {

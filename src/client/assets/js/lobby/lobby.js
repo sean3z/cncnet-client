@@ -11,6 +11,7 @@ function LobbyCtrl($scope, $filter, UserSvc, SocketSvc) {
     vm.users = angular.element(document.getElementById('nicklist'));
     vm.topic = 'Play classic Command & Conquer games online ...';
     vm.nicklist = [];
+    UserSvc.whoami();
 
     vm.submit = function() {
         var message = vm.message;
@@ -19,7 +20,7 @@ function LobbyCtrl($scope, $filter, UserSvc, SocketSvc) {
         UserSvc.whoami().then(function(user) {
             socket.emit('*', {
                 event: 'privmsg',
-                destination: user.channel,
+                destination: user.lobby,
                 message: message
             });
 
@@ -30,33 +31,29 @@ function LobbyCtrl($scope, $filter, UserSvc, SocketSvc) {
     };
 
     socket.on('topic', function(data) {
-        console.log(data);
+        if (data.destination != UserSvc.user.lobby) return;
+
         vm.topic = data.message;
         $scope.$apply();
-
-        // app is ready
-        document.getElementById('loading').style.display = 'none';
     });
 
     socket.on('names', function(data) {
-        console.log(data);
+        if (data.destination != UserSvc.user.lobby) return;
 
         for (var i = 0, x = data.message.length; i < x; i++) {
-            if (vm.nicklist.indexOf(data.message[i]) < 0) {
-                vm.nicklist.push(data.message[i]);
+            var find = $filter('filter')(vm.nicklist, {nick: data.message[i]}, true);
+            if (!find.length) {
+                vm.nicklist.push({
+                    nick: data.message[i]
+                });
                 $scope.$apply();
             }
         }
     });
 
     socket.on('quit', function(data) {
-        console.log(data);
-
-        var index = vm.nicklist.indexOf(data.originator);
-        if (index > -1) {
-            vm.nicklist.splice(index, 1);
-            $scope.$apply();
-        }
+        vm.nicklist = $filter('filter')(vm.nicklist, {nick: '!'+ data.originator}, true);
+        $scope.$apply();
 
         var elem = angular.element('<div></div>');
         elem.addClass('user-action user-quit');
@@ -65,13 +62,10 @@ function LobbyCtrl($scope, $filter, UserSvc, SocketSvc) {
     });
 
     socket.on('part', function(data) {
-        console.log(data);
+        if (data.destination != UserSvc.user.lobby) return;
 
-        var index = vm.nicklist.indexOf(data.originator);
-        if (index > -1) {
-            vm.nicklist.splice(index, 1);
-            $scope.$apply();
-        }
+        vm.nicklist = $filter('filter')(vm.nicklist, {nick: '!'+ data.originator}, true);
+        $scope.$apply();
 
         var elem = angular.element('<div></div>');
         elem.addClass('user-action user-part');
@@ -80,10 +74,13 @@ function LobbyCtrl($scope, $filter, UserSvc, SocketSvc) {
     });
 
     socket.on('join', function(data) {
-        console.log(data);
+        if (data.destination != UserSvc.user.lobby) return;
 
-        if (vm.nicklist.indexOf(data.originator) < 0) {
-            vm.nicklist.push(data.originator);
+        var find = $filter('filter')(vm.nicklist, {nick: data.originator}, true);
+        if (!find.length) {
+            vm.nicklist.push({
+                nick: data.originator
+            });
             $scope.$apply();
         }
 
@@ -94,7 +91,7 @@ function LobbyCtrl($scope, $filter, UserSvc, SocketSvc) {
     });
 
     socket.on('privmsg', function(data) {
-        console.log(data);
+        if (data.destination != UserSvc.user.lobby) return;
 
         data.message = data.message.replace('\u0003', '');
         var elem = angular.element('<div></div>');

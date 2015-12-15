@@ -8,7 +8,7 @@ function GameCtrl($state, $stateParams) {
 
     vm.inGame = false;
 
-    if (!vm.inGame) {
+    if (!$stateParams.create) {
         $state.go('app.create');
     }
 
