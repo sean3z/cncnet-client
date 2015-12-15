@@ -25,6 +25,7 @@ function LobbyCtrl($scope, $filter, UserSvc, SocketSvc) {
 
             var elem = angular.element('<div></div>');
             vm.chat.append(elem.html(timestamp() + '&lt;'+ user.nick +'&gt;: ' + message));
+            scrollToBottom();
         });
     };
 

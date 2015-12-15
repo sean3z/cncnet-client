@@ -1,0 +1,9 @@
+#create {
+    position: fixed;
+    top: 40%;
+    left: 43%;
+}
+
+.create-game {
+    padding: 10px 50px;
+}

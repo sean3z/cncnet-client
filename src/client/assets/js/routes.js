@@ -29,14 +29,27 @@
         });
 
         states.push({
-            name: 'app.user',
-            url: '/user',
-            sticky: true,
+            name: 'app.create',
+            url: '/create',
             views: {
-                settings: {
-                    controller: 'UserCtrl',
-                    controllerAs: 'userCtrlVM',
-                    templateUrl: 'assets/js/user/user.html'
+                create: {
+                    templateUrl: 'assets/js/game/create.html'
+                }
+            }
+        });
+
+        states.push({
+            name: 'app.game',
+            url: '/game',
+            sticky: true,
+            params: {
+              method: null
+            },
+            views: {
+                game: {
+                    controller: 'GameCtrl',
+                    controllerAs: 'gameCtrlVM',
+                    templateUrl: 'assets/js/game/game.html'
                 }
             }
         });
@@ -46,7 +59,7 @@
             url: '/ladder',
             sticky: true,
             views: {
-                settings: {
+                ladder: {
                     controller: 'LadderCtrl',
                     controllerAs: 'ladderCtrlVM',
                     templateUrl: 'assets/js/ladder/ladder.html'
@@ -72,7 +85,7 @@
             url: '/help',
             sticky: true,
             views: {
-                settings: {
+                help: {
                     controller: 'HelpCtrl',
                     controllerAs: 'helpCtrlVM',
                     templateUrl: 'assets/js/help/help.html'
