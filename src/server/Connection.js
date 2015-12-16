@@ -38,7 +38,10 @@ Connection.prototype.connect = function() {
     });
 
     this.socket.on('close', function(error) {
-        if (error) self.connect();
+        this.emit('*', {
+            event: 'close',
+            error: error
+        });
     });
 };
 
@@ -147,13 +150,16 @@ Connection.prototype.delegate = function(buffer) {
                 this.emit('*', data);
             break;
 
+            case 'NOTICE':
+            case 'CTCP':
+                this.emit('*', buffer);
+            break;
+
             default:
-                if (buffer.length) {
-                    this.emit('*', {
-                        event: 'server',
-                        data: buffer
-                    });
-                }
+                this.emit('*', {
+                    event: 'server',
+                    data: buffer
+                });
         }
     }
 };
