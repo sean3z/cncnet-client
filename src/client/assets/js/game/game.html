@@ -1,3 +1,292 @@
-<div id="game">
-    Game Lobby
+<div id="game" class="game-lobby">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="list-inline">
+                            <li>
+                                <div class="form-group">
+                                    <label for="unitCount">Unit Count</label>
+                                    <select id="unitCount" name="unitCount" ng-model="options.unitCount"
+                                            class="form-control">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="form-group">
+                                    <label for="credits">Credits</label>
+                                    <select id="credits" name="credits" ng-model="options.credits" class="form-control">
+                                        <option>3000</option>
+                                        <option>4000</option>
+                                        <option>5000</option>
+                                        <option>6000</option>
+                                        <option>7000</option>
+                                    </select>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="form-group">
+                                    <label for="gameSpeed">Game Speed</label>
+                                    <select id="gameSpeed" name="gameSpeed" ng-model="options.gameSpeed"
+                                            class="form-control">
+                                        <option>Slow</option>
+                                        <option>Normal</option>
+                                        <option>Fast</option>
+                                        <option>Fastest</option>
+                                    </select>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <ul class="list-unstyled">
+                            <li>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" ng-model="options.shortGame"> Short Game
+                                    </label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" ng-model="options.mcvRepacks"> MCV Repacks
+                                    </label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" ng-model="options.superWeapons"> Super Weapons
+                                    </label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" ng-model="options.superWeapons"> Super Weapons
+                                    </label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" ng-model="options.superWeapons"> Super Weapons
+                                    </label>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <ul class="list-unstyled">
+                            <li>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" ng-model="options.shortGame"> Short Game
+                                    </label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" ng-model="options.mcvRepacks"> MCV Repacks
+                                    </label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" ng-model="options.superWeapons"> Super Weapons
+                                    </label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" ng-model="options.superWeapons"> Super Weapons
+                                    </label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" ng-model="options.superWeapons"> Super Weapons
+                                    </label>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-7">
+
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label>Host Tools</label>
+                            <ul class="list-inline">
+                                <li><i class="fa fa-times fa-lg fa-fw"></i></li>
+                                <li><i class="fa fa-ban fa-lg fa-fw"></i></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Player Nickname</label>
+                            <input class="form-control" placeholder="name">
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label>Side</label>
+                            <input class="form-control" placeholder="name">
+                        </div>
+                    </div>
+
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            <label>Colour</label>
+                            <select id="colour" name="colour" class="form-control">
+                                <option>Red</option>
+                                <option>Yellow</option>
+                                <option>Green</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="startPosition">Start</label>
+                            <select id="startPosition" name="startPosition" class="form-control">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option>
+                                <option>8</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="team">Team</label>
+                            <select id="team" name="team" class="form-control">
+                                <option>A</option>
+                                <option>B</option>
+                                <option>C</option>
+                                <option>D</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <ul class="list-inline">
+                                <li><i class="fa fa-times fa-lg fa-fw"></i></li>
+                                <li><i class="fa fa-ban fa-lg fa-fw"></i></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <input class="form-control" placeholder="name">
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <input class="form-control" placeholder="name">
+                        </div>
+                    </div>
+
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            <select id="colour" name="colour" class="form-control">
+                                <option>Red</option>
+                                <option>Yellow</option>
+                                <option>Green</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <select id="startPosition" name="startPosition" class="form-control">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option>
+                                <option>8</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <select id="team" name="team" class="form-control">
+                                <option>A</option>
+                                <option>B</option>
+                                <option>C</option>
+                                <option>D</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-5">
+                <div class="form-group" style="margin-top:20px;">
+                    <label for="lobbyChat">Lobby Chat</label>
+                    <textarea id="lobbyChat" class="form-control" rows="8"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="lobbyInput" class="sr-only">Chat</label>
+                    <input id="lobbyInput" type="text" class="form-control">
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="list-inline">
+                            <li>
+                                <button class="btn btn-success">Launch game</button>
+                            </li>
+
+                            <li>
+                                <button class="btn btn-default">Lock game</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-7 text-center">
+                <h5>Map preview</h5>
+            </div>
+        </div>
+    </div>
 </div>
