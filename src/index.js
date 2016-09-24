@@ -1,9 +1,12 @@
-const app = require('app');  // Module to control application life.
-const BrowserWindow = require('browser-window');  // Module to create native browser window.
-const ipc = require('electron').ipcMain;
+const {app, BrowserWindow, ipcMain, crashReporter} = require('electron');
 
 // Report crashes to our server.
-require('crash-reporter').start();
+crashReporter.start({
+  productName: 'CnCet5 Client',
+  companyName: 'Sean Wragg',
+  submitURL: 'https://your-domain.com/url-to-submit',
+  autoSubmit: true
+});
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -30,7 +33,7 @@ app.on('ready', function() {
   // mainWindow.openDevTools();
   mainWindow.setMenu(null);
 
-  ipc.on('asynchronous-message', function(event, arg) {
+  ipcMain.on('asynchronous-message', function(event, arg) {
       switch (arg.event) {
           case 'authenticated':
             mainWindow.hide();

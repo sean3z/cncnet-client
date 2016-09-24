@@ -46,10 +46,9 @@ Connection.prototype.connect = function() {
 };
 
 Connection.prototype.send = function(message) {
-    if (this.socket) {
-        this.socket.write(message +'\r\n');
-        debug('out: %s', message);
-    }
+    if (!this.socket) return;
+    this.socket.write(message +'\r\n');
+    debug('out: %s', message);
 };
 
 Connection.prototype.join = function(opts) {

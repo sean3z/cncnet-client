@@ -11,7 +11,7 @@ function LoginFormCtrl($http) {
     vm.submit = function() {
         if (!vm.nick || !vm.username || !vm.password) return;
 
-        var url = 'http://api.cncnet.org/auth/' + vm.nick;
+        var url = 'http://ladder.cncnet.org/api/auth/' + vm.nick;
         var token = window.btoa([vm.username, vm.password].join(':'));
         var request = {
             method: 'GET',
