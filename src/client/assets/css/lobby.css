@@ -1,8 +1,6 @@
 .lobby .list {
     height: 450px;
     background-color: #1e2127;
-    margin-bottom: 15px;
-    padding: 10px;
 }
 
 .lobby .chat {
@@ -29,6 +27,15 @@
 .lobby .nicklist {
     overflow-x: hidden;
     white-space: nowrap;
+}
+
+.lobby #nicklist {
+    background-color: #1e2127;
+    white-space: nowrap;
+    width: 100%;
+    outline: none;
+    border: none;
+    height: 100%;
 }
 
 .lobby .game-information {

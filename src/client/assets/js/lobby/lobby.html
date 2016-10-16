@@ -42,11 +42,11 @@
 
         <div class="col-sm-2">
             <div class="list nicklist">
-                <ul id="nicklist" class="users list-group">
-                    <li ng-repeat="user in lobbyCtrlVM.nicklist | orderBy:'nick'">
+                <select id="nicklist" class="users list-group" multiple>
+                    <option ng-repeat="user in lobbyCtrlVM.nicklist | orderBy:'nick'">
                         {{user.nick}}
-                    </li>
-                </ul>
+                    </option>
+                </select>
             </div>
         </div>
     </div>
